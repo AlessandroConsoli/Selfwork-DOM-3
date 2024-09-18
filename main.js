@@ -1,8 +1,5 @@
-// Domanda: Quando inserisco un valore dopo aver fatto reset parte lo stesso dal valore precedente  
-
-
-let countDownInput = document.querySelector('#countDownInput');
 let remainingTime = document.querySelector('#remainingTime');
+let countDownInput = document.querySelector('#countDownInput');
 let startBtn = document.querySelector('#startBtn');
 let stopBtn = document.querySelector('#stopBtn');
 let resetBtn = document.querySelector('#resetBtn');
@@ -18,13 +15,14 @@ let remainingSeconds = 0;
 startBtn.addEventListener('click', ()=>{
     clearInterval(interval);
     counter = countDownInput.value;    //<=== Valore inserito dall'utente
+    
 
-    if (countDownInput.value > 300) {
-        alert(`Ho un impegno per Natale! \nPer favore inserisci un valore non superiore a 300 sec!`)
-        counter = ``;
+    while (countDownInput.value > 300) {
         clearInterval(interval)
-        remainingTime.value = ``;
-        remainingSeconds.innerHTML = '';        
+        alert(`Ho un impegno per Natale! \nPer favore inserisci un valore non superiore a 300 sec!`)
+        remainingTime.innerHTML = `Valore non consentito`;   
+        counter = '';
+        break;
     }
 
 
@@ -35,7 +33,7 @@ startBtn.addEventListener('click', ()=>{
     interval = setInterval( ()=>{
         if (counter < 0) {
             clearInterval(interval)
-            remainingTime.innerHTML = `Tempo scaduto`
+            remainingTime.innerHTML = `Tempo scaduto!`
         }else{
             remainingTime.innerHTML = counter
             counter --
@@ -56,6 +54,7 @@ resetBtn.addEventListener('click', ()=>{
     countDownInput.value = ``;
     clearInterval(interval)
     remainingTime.innerHTML = ``;
+    remainingSeconds = 0;
 })
 
 
